@@ -1,0 +1,20 @@
+<div class="text-center">
+    <h1>Web Scraper</h1>
+    <%= form_with(model: @scrape, url: root_path, local: true, :class => "form-inline" ) do |form| %>
+      <div class="form-group">
+        <%= form.label(:url) do %>
+        URL
+        <% end %>
+        <div class="input-group">
+            <%= form.text_field :url, :class => "form-control" %>
+        </div>
+      </div>
+      <%= form.submit 'Scrape!', :class => 'btn btn-primary' %>
+      
+    <% end %>
+    <% if !@scrape.nil? %>
+      <% @scrape.errors.messages.each do |message| %>
+        <b><%= message[1][0] %></b>
+      <% end %>
+    <% end %>
+</div>

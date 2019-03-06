@@ -1,0 +1,2 @@
+class WebJob < ApplicationRecord
+end
