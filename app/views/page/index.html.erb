@@ -1,20 +1,68 @@
 <div class="text-center">
-    <h1>Web Scraper</h1>
-    <%= form_with(model: @scrape, url: root_path, local: true, :class => "form-inline" ) do |form| %>
-      <div class="form-group">
-        <%= form.label(:url) do %>
-        URL
-        <% end %>
-        <div class="input-group">
-            <%= form.text_field :url, :class => "form-control" %>
+    <h1>簡単Webスクレイピング</h1>
+    <%= form_with(model: @scrape, url: root_path, local: true) do |form| %>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-12 text-left">
+              <%= form.label(:url) do %>
+                URL
+              <% end %>
+            </div>
+            <div class="col-sm-12 text-left" style="padding-bottom: 50px;">
+              <div class="">
+                  <%= form.text_field :url, :class => "form-control" %>
+                  例）https://news.yahoo.co.jp/flash
+              </div>
+            </div>
+            <div class="col-sm-12 text-left">
+              <%= form.label(:email) do %>
+                結果を通知するメールアドレス
+              <% end %>
+            </div>
+            <div class="col-sm-12 text-left" style="padding-bottom: 50px;">
+              <div class="">
+                  <%= form.text_field :email, :class => "form-control" %>
+                  
+              </div>
+            </div>
+            <div class="col-sm-12 text-left">
+              <%= form.label(:target_item) do %>
+                取得したい繰り返し項目のXPATH記法
+              <% end %>
+            </div>
+            <div class="col-sm-12 text-left" style="padding-bottom: 50px;">
+              <div class="">
+                  <%= form.text_field :target_item, :class => "form-control" %>
+                  例）//li[@class='listFeedWrap'] → <a href="https://qiita.com/rllllho/items/cb1187cec0fb17fc650a" target="_blank">書き方はこちらの記事が参考になります</a>
+              </div>
+            </div>
+            <div class="col-sm-12 text-left">
+              <%= form.label(:target_tag) do %>
+                繰り返し項目の中の取得したいタグ
+              <% end %>
+            </div>
+            <div class="col-sm-12 text-left" style="padding-bottom: 50px;">
+              <div class="">
+                  <%= form.text_field :target_tag, :class => "form-control" %>
+                  例）dt
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <%= form.submit 'Scrape!', :class => 'btn btn-primary' %>
-      
+      <div class="col-sm-12">
+        <%= form.submit 'Scrape!', :class => 'btn btn-primary' %>
+      </div>
+    </div>
     <% end %>
+    
     <% if !@scrape.nil? %>
-      <% @scrape.errors.messages.each do |message| %>
-        <b><%= message[1][0] %></b>
+    <div class="row">
+      <% @scrape.errors.full_messages.each do |message| %>
+        <div class="col-sm-12"><b class="text-danger"><%= message %></b></div>
       <% end %>
+    </div>
     <% end %>
 </div>

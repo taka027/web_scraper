@@ -67,4 +67,5 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass'
 gem "font-awesome-rails"
-
+gem 'rails-i18n'
+gem 'nokogiri'

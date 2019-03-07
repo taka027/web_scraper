@@ -1,6 +1,14 @@
 <div class="text-center">
     <h1>Web Scraper</h1>
-    
-    <%= @message %>
-    <%= link_to 'Back', '/', :class => 'btn btn-primary' %>
+    <div class="row">
+        <div class="col-md-12">
+            入力URLのスクレイピングを開始しました。結果はメールで返します。
+        </div>
+        <div class="col-md-12">
+            <%= @url %>
+        </div>
+        <div class="col-md-12">
+            <%= link_to 'Back', '/', :class => 'btn btn-primary' %>
+        </div>
+    </div>
 </div>

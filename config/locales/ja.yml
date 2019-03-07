@@ -1,0 +1,11 @@
+ja:
+  activemodel:
+    models:
+      scrape: "スクレイピング要求"
+    attributes:
+      scrape:
+        url: "URL"
+        email: "メールアドレス"
+        target_item: "XPATH表記"
+        target_tag: "タグ"
+
