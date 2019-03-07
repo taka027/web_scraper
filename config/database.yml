@@ -47,8 +47,4 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: web_scraper_production
-  username: web_scraper
-  password: <%= ENV['WEB_SCRAPER_DATABASE_PASSWORD'] %>
+production: <%= ENV['CLEARDB_DATABASE_URL'] %>
