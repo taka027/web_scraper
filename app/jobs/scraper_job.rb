@@ -23,8 +23,8 @@ class ScraperJob < ApplicationJob
       end
       
       UserMailer.notice(email, url, result).deliver_now
-    rescue 
-      result = "Error";
+    rescue => e
+      logger.error(e.backtrace.join("\n"))
     end
     
     
