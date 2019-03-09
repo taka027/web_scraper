@@ -9,7 +9,7 @@ class ScraperJob < ApplicationJob
       # スクレイピング開始
       charset = nil
       
-      html = open(url) do |f|
+      html = open(url, :redirect => true) do |f|
         charset = f.charset
         f.read
       end
