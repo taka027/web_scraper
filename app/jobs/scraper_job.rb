@@ -24,7 +24,7 @@ class ScraperJob < ApplicationJob
       
       UserMailer.notice(email, url, result).deliver_now
     rescue => e
-      logger.error(e.backtrace.join("\n"))
+      logger.error(e)
     end
     
     
