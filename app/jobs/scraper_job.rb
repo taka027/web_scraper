@@ -21,7 +21,7 @@ class ScraperJob < ApplicationJob
       doc.xpath(target_item).each do |n|
         #取得
         te = n.css(target_tag).inner_text
-        logger.debug("inner_text :node[" + n.to_s + "]:" + te)
+        #logger.debug("inner_text :node[" + n.to_s + "]:" + te)
         result << te + "\n"
       end
       
