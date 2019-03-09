@@ -16,10 +16,13 @@ class ScraperJob < ApplicationJob
   
       doc = Nokogiri::HTML.parse(html, nil, charset)
   
+      logger.error("doc:" + doc.to_s)
       
       doc.xpath(target_item).each do |n|
         #取得
-        result << n.css(target_tag).inner_text + "\n"
+        te = n.css(target_tag).inner_text
+        logger.error("inner_text :node[" + n.to_s + "]:" + te)
+        result << te + "\n"
       end
       
       UserMailer.notice(email, url, result).deliver_now
