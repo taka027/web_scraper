@@ -69,3 +69,5 @@ gem 'bootstrap-sass'
 gem "font-awesome-rails"
 gem 'rails-i18n'
 gem 'nokogiri'
+gem 'chromedriver-helper'
+gem 'selenium-webdriver'

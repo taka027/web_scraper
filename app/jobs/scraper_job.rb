@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'selenium-webdriver'
 class ScraperJob < ApplicationJob
   queue_as :scraper
 
@@ -7,14 +8,22 @@ class ScraperJob < ApplicationJob
     begin
       
       # スクレイピング開始
-      charset = nil
+      # charset = nil
       
-      html = open(url, {:redirect => true, 'User-Agent' => 'robo/0.1'}) do |f|
-        charset = f.charset
-        f.read
-      end
+      # html = open(url, {:redirect => true, 'User-Agent' => 'robo/0.1'}) do |f|
+      #   charset = f.charset
+      #   f.read
+      # end
   
-      doc = Nokogiri::HTML.parse(html, nil, charset)
+      # logger.debug("charset:" + charset)
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument('--headless')
+
+      driver = Selenium::WebDriver.for :chrome, options: options
+      #driver.manage.timeouts.implicit_wait = 10 
+      driver.get url
+      doc = Nokogiri::HTML driver.page_source.encode("UTF-8") 
+      #doc = Nokogiri::HTML.parse(html, nil, charset)
   
       #logger.debug("doc:" + doc.to_s)
       
