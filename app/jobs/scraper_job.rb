@@ -3,7 +3,7 @@ require 'open-uri'
 class ScraperJob < ApplicationJob
   queue_as :scraper
 
-  def perform(email, url, target_item, target_tag)
+  def perform(filename, url, target_item, target_tag)
     result = ""
     begin
       
@@ -29,12 +29,22 @@ class ScraperJob < ApplicationJob
       
       doc.xpath(target_item).each do |n|
         #取得
-        te = n.css(target_tag).inner_text
+        target_tag.split(",").each do |s|
+          te = n.css(s).inner_text
+          result << te + ","
+        end
+
         #logger.debug("inner_text :node[" + n.to_s + "]:" + te)
-        result << te + "\n"
+        result << "\n"
       end
       
-      UserMailer.notice(email, url, result).deliver_now
+      output_path = Rails.root.join('public', filename)
+
+      File.open(output_path, 'w+b') do |fp|
+        fp.write result
+      end
+      
+      #UserMailer.notice(email, url, result).deliver_now
     rescue => e
       logger.error(e)
     end
