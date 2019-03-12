@@ -32,7 +32,7 @@ class ScraperJob < ApplicationJob
         target_tag.split(",").each do |s|
           te = ""
           if n.css(s)
-            te = n.css(s).inner_text.chomp.encode(charcode)
+            te = n.css(s).inner_text.gsub(/(\r\n|\r|\n)/, "").encode(charcode)
           end
           result << te + ","
         end

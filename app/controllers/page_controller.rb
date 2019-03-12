@@ -28,7 +28,7 @@ class PageController < ApplicationController
   end
   
   def get_charcode
-    if request.headers["HTTP_USER_AGENT"].index("windows")
+    if request.headers["HTTP_USER_AGENT"].index("Windows")
       "Shift_JIS"
     else
       "UTF-8"
