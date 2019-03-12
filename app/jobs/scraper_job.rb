@@ -3,7 +3,7 @@ require 'open-uri'
 class ScraperJob < ApplicationJob
   queue_as :scraper
 
-  def perform(filename, url, target_item, target_tag)
+  def perform(filename, url, target_item, target_tag, charcode)
     result = ""
     begin
       
@@ -30,7 +30,10 @@ class ScraperJob < ApplicationJob
       doc.xpath(target_item).each do |n|
         #取得
         target_tag.split(",").each do |s|
-          te = n.css(s).inner_text
+          te = ""
+          if n.css(s)
+            te = n.css(s).inner_text.chomp.encode(charcode)
+          end
           result << te + ","
         end
 
@@ -48,8 +51,5 @@ class ScraperJob < ApplicationJob
     rescue => e
       logger.error(e)
     end
-    
-    
-    
   end
 end
