@@ -34,7 +34,7 @@ class ScraperJob < ApplicationJob
           if n.css(s)
             te = n.css(s).inner_text.gsub(/(\r\n|\r|\n)/, "").encode(charcode)
           end
-          result << te + ","
+          result << "\"" + te + "\","
         end
 
         #logger.debug("inner_text :node[" + n.to_s + "]:" + te)
