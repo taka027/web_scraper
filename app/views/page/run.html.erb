@@ -1,12 +1,26 @@
 <div class="text-center">
     <h1>簡単Webスクレイピング</h1>
-    <div class="row">
+    
+        <div id="loading-bg">
+            <div id="loading">
+                <%= image_tag 'loading.gif' %>
+            </div>
+        </div>
+
+        <div class="row" id="result">
         <div class="col-md-12">
-            <p>入力URLのスクレイピングを開始しました。</p>
-            <p>しばらくしてから下のURLより結果を取得してください。</p>
+            <p>スクレイピングが完了しました。</p>
+            
         </div>
         <div class="col-md-12">
-            <a href='<%= @path %>' target="_blank"><%= @path %></a>
+            <% if @path.start_with?("/") %>
+                <p>下のURLより結果を取得してください。</p>
+                <a href='<%= @path %>' target="_blank"><%= @path %></a>
+            <% else %>
+                <p>Error</p>
+                <%= @path %>
+            
+            <% end %>
         </div>
         <div class="col-md-12">
             <%= link_to 'Back', '/', :class => 'btn btn-primary' %>
